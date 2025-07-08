@@ -61,6 +61,18 @@ const CardDetails = ({ onCloseCard }) => {
             )}
           </div>
           <div className="flex items-center justify-end gap-2">
+            <button
+              className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
+              href="#"
+            >
+              Count
+            </button>
+            <button
+              className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
+              href="#"
+            >
+              Total
+            </button>
             <a
               className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
               href="#"
