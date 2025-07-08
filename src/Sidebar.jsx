@@ -1,7 +1,7 @@
 import ComingSoon from "./assets/icons/commingSoon.svg";
 import Favourites from "./assets/icons/favourite.svg";
+import HomeSvg from "./assets/icons/HomeSvg";
 import NewRelease from "./assets/icons/newRelease.svg";
-import Trending from "./assets/icons/trending.svg";
 import WatchLater from "./assets/icons/watchLater.svg";
 
 const Sidebar = () => {
@@ -13,8 +13,8 @@ const Sidebar = () => {
             className="flex items-center space-x-2 px-5 py-3.5 rounded-lg bg-primary text-black"
             href="#"
           >
-            <img src={Trending} width="24" height="24" alt="Trending" />
-            <span>Trending</span>
+            <HomeSvg />
+            <span>Home</span>
           </a>
         </li>
         <li>
