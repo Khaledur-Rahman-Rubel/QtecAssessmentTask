@@ -106,7 +106,7 @@ const CardDetails = ({ onCloseCard }) => {
               Items: {state.cartData.length}
             </span>
             <span className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm">
-              Subtotal (MRP): ${total.toFixed(2)}
+              Total: ${total.toFixed(0)}
             </span>
             {showCheckout && (
               <CheckoutModal onClose={() => setShowCheckout(false)} />
