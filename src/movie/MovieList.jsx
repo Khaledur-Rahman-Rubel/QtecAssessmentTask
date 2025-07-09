@@ -16,7 +16,7 @@ const MovieList = () => {
     <div className="content">
       {loading ? (
         <div className="text-center py-10 text-lg font-semibold">
-          Loading movies...
+          Loading...
         </div>
       ) : (
         <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-7">
