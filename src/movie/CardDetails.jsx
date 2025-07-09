@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Delete from "../assets/delete.svg";
 import Checkout from "../assets/icons/checkout.svg";
 import { MovieContext } from "../context";
 import { getImgUrl } from "../utils/movieUtility";
+import CheckoutModal from "./CheckoutModal";
 
 const CardDetails = ({ onCloseCard }) => {
   const { state, dispatch } = useContext(MovieContext);
+  const [showCheckout, setShowCheckout] = useState(false);
 
   const handleDeleteCart = (event, itemId) => {
     event.preventDefault();
@@ -15,6 +17,11 @@ const CardDetails = ({ onCloseCard }) => {
       itemId,
     });
   };
+
+  const total = state.cartData.reduce(
+    (acc, item) => acc + Number(item.price),
+    0
+  );
 
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-xs">
@@ -61,25 +68,30 @@ const CardDetails = ({ onCloseCard }) => {
             )}
           </div>
           <div className="flex items-center justify-end gap-2">
-            <button
+            <span
               className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
               href="#"
             >
-              Count
-            </button>
-            <button
+              Count: {state.cartData.length}
+            </span>
+            <span
               className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
               href="#"
             >
-              Total
-            </button>
-            <a
+              Total: ${total.toFixed(2)}
+            </span>
+            {showCheckout && (
+              <CheckoutModal onClose={() => setShowCheckout(false)} />
+            )}
+
+            <button
               className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
-              href="#"
+              onClick={() => setShowCheckout(true)}
             >
               <img src={Checkout} width="24" height="24" alt="" />
               <span>Checkout</span>
-            </a>
+            </button>
+
             <a
               className="border border-[#74766F] rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#6F6F6F] dark:text-gray-200 font-semibold text-sm"
               href="#"
