@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import Delete from "../assets/delete.svg";
-import Checkout from "../assets/icons/checkout.svg";
 import { MovieContext } from "../context";
 import { getImgUrl } from "../utils/movieUtility";
 import CheckoutModal from "./CheckoutModal";
@@ -116,7 +115,6 @@ const CardDetails = ({ onCloseCard }) => {
               className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
               onClick={() => setShowCheckout(true)}
             >
-              <img src={Checkout} width="24" height="24" alt="" />
               <span>Checkout</span>
             </button>
 
