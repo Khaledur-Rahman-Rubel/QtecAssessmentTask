@@ -13,13 +13,13 @@ const CardDetails = ({ onCloseCard }) => {
     event.preventDefault();
 
     dispatch({
-      type: "REMOVE_fROM_CART",
+      type: "REMOVE_FROM_CART",
       itemId,
     });
   };
 
   const total = state.cartData.reduce(
-    (acc, item) => acc + Number(item.price),
+    (acc, item) => acc + item.price * item.quantity,
     0
   );
 
@@ -54,12 +54,43 @@ const CardDetails = ({ onCloseCard }) => {
                       <span className="max-md:text-xs">${item.price}</span>
                     </div>
                   </div>
+
                   <div className="flex justify-between gap-4 items-center">
+                    <div className="flex items-center gap-2">
+                      <button
+                        className="bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded text-black dark:text-white font-bold"
+                        onClick={() =>
+                          dispatch({
+                            type: "DECREMENT_QUANTITY",
+                            itemId: item.id,
+                          })
+                        }
+                        disabled={item.quantity === 1}
+                      >
+                        −
+                      </button>
+                      <span className="min-w-[24px] text-center">
+                        {item.quantity}
+                      </span>
+                      <button
+                        className="bg-gray-300 dark:bg-gray-700 px-3 py-1 rounded text-black dark:text-white font-bold"
+                        onClick={() =>
+                          dispatch({
+                            type: "INCREMENT_QUANTITY",
+                            itemId: item.id,
+                          })
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+
+                    {/* Remove Button */}
                     <button
                       onClick={(event) => handleDeleteCart(event, item.id)}
                       className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
                     >
-                      <img className="w-5 h-5" src={Delete} alt="" />
+                      <img className="w-5 h-5" src={Delete} alt="delete icon" />
                       <span className="max-md:hidden">Remove</span>
                     </button>
                   </div>
@@ -72,13 +103,10 @@ const CardDetails = ({ onCloseCard }) => {
               className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
               href="#"
             >
-              Count: {state.cartData.length}
+              Items: {state.cartData.length}
             </span>
-            <span
-              className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm"
-              href="#"
-            >
-              Total: ${total.toFixed(2)}
+            <span className="rounded-md p-2 md:px-4 inline-flex items-center space-x-2 bg-primary text-[#171923] text-sm">
+              Subtotal (MRP): ${total.toFixed(2)}
             </span>
             {showCheckout && (
               <CheckoutModal onClose={() => setShowCheckout(false)} />
